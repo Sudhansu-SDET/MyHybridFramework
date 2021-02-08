@@ -26,6 +26,8 @@ public class BaseClass {
 	public ExtentReports reports ; 
 	public ExtentTest logger ; 
 	
+	
+	//testgit
 	//create a method just to initalize all objects thats required in project and extend to this base class to access these
 	@BeforeSuite
 	public void setupSuite() throws Throwable {
