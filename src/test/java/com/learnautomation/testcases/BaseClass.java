@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -27,7 +28,7 @@ public class BaseClass {
 	public ExtentTest logger ; 
 	
 	
-	//testgit
+	
 	//create a method just to initalize all objects thats required in project and extend to this base class to access these
 	@BeforeSuite
 	public void setupSuite() throws Throwable {
@@ -41,10 +42,16 @@ public class BaseClass {
 		 
 	}
 	
+	@Parameters({"browser","url"})
 	@BeforeClass
-	public void setUp() {
-		//driver = BrowserFactory.startApplication(driver, "Chrome", "http://demo.guru99.com/test/newtours/login.php");
-		driver = BrowserFactory.startApplication(driver, config.getDataFromConfig("browser"), config.getDataFromConfig("url"));
+	public void setUp(String browser , String url) {
+		//this is static way - driver = BrowserFactory.startApplication(driver, "Chrome", "http://demo.guru99.com/test/newtours/login.php");
+		
+		//the below statement is driven from config file
+		//driver = BrowserFactory.startApplication(driver, config.getDataFromConfig("browser"), config.getDataFromConfig("url"));
+	
+		// this statement is driven from data from pom , that is set under run configutation or can be given as -Dbrowser during run time
+		driver = BrowserFactory.startApplication(driver,browser,url);
 		
 		System.out.println(driver.getTitle());
 	}
